@@ -10,10 +10,11 @@ const Grafico = (props) => {
   const data3 = [15, 5, 35];
   const [result, setResult] = useState([]);
   const [resultBtcPrice, setResultBtcPrice] = useState([]);
+  const [resultBtcTime, setResultBtcTime] = useState([]);
 
   useEffect(() => {
     fetch(
-      "https://min-api.cryptocompare.com/data/v2/histominute?fsym=BTC&tsym=CLP&limit=3&api_key=1538e6cd3a57308e6e3a8f75d008b49553958f7ce261905e23de93b647f83cb4"
+      "https://min-api.cryptocompare.com/data/v2/histominute?fsym=BTC&tsym=CLP&limit=100&api_key=1538e6cd3a57308e6e3a8f75d008b49553958f7ce261905e23de93b647f83cb4"
     
     )
       .then((response) => response.json())
@@ -26,6 +27,15 @@ const Grafico = (props) => {
     ));
     setResultBtcPrice(arr)
     console.log(arr);
+    const arr2 = btcPrice.map((index) => (
+       index.time
+    ));
+    setResultBtcTime(arr2)
+    console.log(arr2);
+
+
+
+
   }, [btcPrice]);
 
   return (
@@ -35,7 +45,7 @@ const Grafico = (props) => {
         <div class="col-md-8">
           <Line
             data={{
-              labels: labels,
+              labels: resultBtcTime,
               datasets: [
                 {
                   label: "BTC",
