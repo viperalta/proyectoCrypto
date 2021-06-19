@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import CompraForm from "../components/CompraForm";
 import { useUser } from "../contexts/userContext";
 import axios from "axios";
@@ -9,6 +9,12 @@ const Main = () => {
   const { user, setUser } = useUser();
   const [errors, setErrors] = useState([]);
   const [compras, setCompras] = useState([]);
+
+  useEffect(() => {
+    axios
+        .get("/api/compras-by-user/" + user._id, { withCredentials: true })
+        .then((res) => setCompras(res.data));
+  }, []);
 
   const createCompra = (values) => {
     const compra = {
@@ -53,9 +59,6 @@ const Main = () => {
 
   const showBilletera = () => {
     if (user) {
-      axios
-        .get("/api/compras-by-user/" + user._id, { withCredentials: true })
-        .then((res) => setCompras(res.data));
 
       if (compras) {
         return (
