@@ -80,7 +80,7 @@ const Main = () => {
       if(user){
         return(<>
         <h2>Bienvenid@ al proyecto crypto</h2>
-        <CompraForm />
+        <CompraForm onSubmitProp={createCompra} />
         
         </>)
       }
