@@ -1,5 +1,6 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import CompraForm from "../components/CompraForm";
+import Billetera from "../components/Billetera";
 import { useUser } from "../contexts/userContext";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -9,13 +10,15 @@ const Main = () => {
   const { user, setUser } = useUser();
   const [errors, setErrors] = useState([]);
   const [compras, setCompras] = useState([]);
+  const [refresh,setRefresh]=useState(1);
 
   useEffect(() => {
-    if (user) { axios
+    if (user) {
+      axios
         .get("/api/compras-by-user/" + user._id, { withCredentials: true })
-        .then((res) => setCompras(res.data));}
-   
-  }, []);
+        .then((res) => setCompras(res.data));
+    }
+  }, [refresh]);
 
   const createCompra = (values) => {
     const compra = {
@@ -30,11 +33,11 @@ const Main = () => {
       .then((res) => {
         console.log(res);
         Swal.fire({
-            icon: "success",
-            title: "Compraste "+ compra.moneda+"("+compra.monto+")",
-            showConfirmButton: false,
-            timer: 3000,
-          });
+          icon: "success",
+          title: "Compraste " + compra.moneda + "(" + compra.monto + ")",
+          showConfirmButton: false,
+          timer: 3000,
+        });
         axios
           .get(`/api/user/${res.data._id}`, { withCredentials: true })
           .then((res) => {
@@ -44,6 +47,7 @@ const Main = () => {
             console.error(err);
             return { success: false, data: err.message };
           });
+          setRefresh((prev)=>prev+1);
       })
       .catch((err) => {
         console.log(err);
@@ -60,7 +64,6 @@ const Main = () => {
 
   const showBilletera = () => {
     if (user) {
-
       if (compras) {
         return (
           <>
@@ -82,19 +85,29 @@ const Main = () => {
   };
 
   const showMain = () => {
-      if(user){
-        return(<>
-        <h2>Bienvenid@ al proyecto crypto</h2>
-        <CompraForm onSubmitProp={createCompra} />
-        
-        </>)
-      }
-      else{
-          return(<>
+    if (user) {
+      return (
+        <>
           <h2>Bienvenid@ al proyecto crypto</h2>
-          </>)
-      }
-  }
+
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-md-4"><CompraForm onSubmitProp={createCompra} /></div>
+              <div className="col-md-8"><Billetera compras={compras} /></div>
+            </div>
+          </div>
+
+          
+        </>
+      );
+    } else {
+      return (
+        <>
+          <h2>Bienvenid@ al proyecto crypto</h2>
+        </>
+      );
+    }
+  };
 
   return (
     <div>
@@ -105,8 +118,7 @@ const Main = () => {
       ))}
       {showMain()}
       {showBilletera()}
-      <Grafico/>
-      
+      <Grafico />
     </div>
   );
 };
