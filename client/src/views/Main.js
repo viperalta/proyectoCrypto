@@ -1,0 +1,107 @@
+import React, { useState } from "react";
+import CompraForm from "../components/CompraForm";
+import { useUser } from "../contexts/userContext";
+import axios from "axios";
+import Swal from "sweetalert2";
+
+const Main = () => {
+  const { user, setUser } = useUser();
+  const [errors, setErrors] = useState([]);
+  const [compras, setCompras] = useState([]);
+
+  const createCompra = (values) => {
+    const compra = {
+      moneda: values.moneda,
+      monto: values.monto,
+      idUser: user._id,
+    };
+    console.log(compra);
+
+    axios
+      .post("/api/compra/add", compra, { withCredentials: true })
+      .then((res) => {
+        console.log(res);
+        Swal.fire({
+            icon: "success",
+            title: "Compraste "+ compra.moneda+"("+compra.monto+")",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        axios
+          .get(`/api/user/${res.data._id}`, { withCredentials: true })
+          .then((res) => {
+            setUser(res.data);
+          })
+          .catch((err) => {
+            console.error(err);
+            return { success: false, data: err.message };
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+        const errorResponse = err.response.data.errors; // Get the errors from err.response.data
+        const errorArr = []; // Define a temp error array to push the messages in
+        for (const key of Object.keys(errorResponse)) {
+          // Loop through all errors and get the messages
+          errorArr.push(errorResponse[key].message);
+        }
+        // Set Errors
+        setErrors(errorArr);
+      });
+  };
+
+  const showBilletera = () => {
+    if (user) {
+      axios
+        .get("/api/compras-by-user/" + user._id, { withCredentials: true })
+        .then((res) => setCompras(res.data));
+
+      if (compras) {
+        return (
+          <>
+            <h1>Mi Billetera</h1>
+            {compras.map((compra, key) => (
+              <p>
+                {" "}
+                {compra.moneda} {compra.monto}{" "}
+              </p>
+            ))}
+          </>
+        );
+      } else {
+        return <></>;
+      }
+    } else {
+      return <></>;
+    }
+  };
+
+  const showMain = () => {
+      if(user){
+        return(<>
+        <h2>Bienvenid@ al proyecto crypto</h2>
+        <CompraForm />
+        
+        </>)
+      }
+      else{
+          return(<>
+          <h2>Bienvenid@ al proyecto crypto</h2>
+          </>)
+      }
+  }
+
+  return (
+    <div>
+      {errors.map((err, index) => (
+        <div className="alert alert-danger" role="alert">
+          {err}
+        </div>
+      ))}
+      {showMain()}
+      {showBilletera()}
+    </div>
+  );
+};
+
+export default Main;
