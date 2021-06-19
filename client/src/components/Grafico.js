@@ -57,9 +57,6 @@ const Grafico = (props) => {
 
     const arrLtc = ltcPrice.map((index) => index.open);
     setResultLtcPrice(arrLtc);
-
-    console.log(arrTimeRaw)
-    console.log(arrBtc)
   }, [btcPrice]);
 
   return (

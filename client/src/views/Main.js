@@ -117,7 +117,6 @@ const Main = () => {
         </div>
       ))}
       {showMain()}
-      {showBilletera()}
       <Grafico />
     </div>
   );
