@@ -11,9 +11,10 @@ const Main = () => {
   const [compras, setCompras] = useState([]);
 
   useEffect(() => {
-    axios
+    if (user) { axios
         .get("/api/compras-by-user/" + user._id, { withCredentials: true })
-        .then((res) => setCompras(res.data));
+        .then((res) => setCompras(res.data));}
+   
   }, []);
 
   const createCompra = (values) => {
