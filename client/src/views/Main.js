@@ -3,6 +3,7 @@ import CompraForm from "../components/CompraForm";
 import { useUser } from "../contexts/userContext";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Grafico from "../components/Grafico";
 
 const Main = () => {
   const { user, setUser } = useUser();
@@ -100,6 +101,8 @@ const Main = () => {
       ))}
       {showMain()}
       {showBilletera()}
+      <Grafico/>
+      
     </div>
   );
 };
