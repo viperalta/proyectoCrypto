@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from "react";
 import * as chartjs from "chart.js";
 import { Line } from "react-chartjs-2";
-import moment from 'moment'
+import moment from "moment";
 
 const Grafico = (props) => {
   const [btcPrice, setBtcPrice] = useState([]);
   const [ethPrice, setEthPrice] = useState([]);
   const [ltcPrice, setLtcPrice] = useState([]);
-  const labels = ["fecha1", "fecha2", "fecha3", "fecha4"];
-  const data = [1, 2, 30];
-  const data2 = [13, 23, 3];
-  const data3 = [15, 5, 35];
-  const [result, setResult] = useState([]);
+
   const [resultBtcPrice, setResultBtcPrice] = useState([]);
   const [resultEthPrice, setResultEthPrice] = useState([]);
   const [resultLtcPrice, setResultLtcPrice] = useState([]);
   const [resultBtcTime, setResultBtcTime] = useState([]);
-  const [timeStamp, setTimeStamp] = useState([]);
+
   // BTC
   useEffect(() => {
     fetch(
@@ -43,10 +39,9 @@ const Grafico = (props) => {
   }, []);
 
   useEffect(() => {
-    // const dateString = moment.unix(value).format("MM/DD/YYYY")
-    
-    const arrTimeRaw = btcPrice.map((index) => 
-    moment.unix(index.time).format("MM/DD/YYYY"));
+    const arrTimeRaw = btcPrice.map((index) =>
+      moment.unix(index.time).format("MM/DD")
+    );
     setResultBtcTime(arrTimeRaw);
 
     const arrBtc = btcPrice.map((index) => index.open);
@@ -57,13 +52,24 @@ const Grafico = (props) => {
 
     const arrLtc = ltcPrice.map((index) => index.open);
     setResultLtcPrice(arrLtc);
-  }, [btcPrice]);
+  }, [btcPrice, ethPrice, ltcPrice]);
+
+  const options = {
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  };
 
   return (
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-4">
-          {" "}
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-md-4">
+          <h5>
+            <img src="https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@07fd63a0b662ed99c8ad870ee9227b8ef5e11630/svg/color/btc.svg"></img>{" "}
+            BTC{" "}
+          </h5>
           <Line
             data={{
               labels: resultBtcTime,
@@ -71,7 +77,8 @@ const Grafico = (props) => {
                 {
                   label: "BTC",
                   data: resultBtcPrice,
-                  fill: false,
+                  fill: true,
+                  backgroundColor: "rgba(75, 192, 192, 0.5)",
                   borderColor: "rgb(75, 192, 192)",
                   tension: 0.1,
                 },
@@ -79,9 +86,14 @@ const Grafico = (props) => {
             }}
             height={400}
             width={600}
+            options={options}
           />
         </div>
-        <div class="col-md-4">
+        <div className="col-md-4">
+          <h5>
+            <img src="https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@07fd63a0b662ed99c8ad870ee9227b8ef5e11630/svg/color/eth.svg"></img>{" "}
+            ETH
+          </h5>
           <Line
             data={{
               labels: resultBtcTime,
@@ -89,24 +101,23 @@ const Grafico = (props) => {
                 {
                   label: "ETH",
                   data: resultEthPrice,
-                  fill: false,
+                  fill: true,
+                  backgroundColor: "rgba(165, 105, 189, 0.5)",
                   borderColor: "rgb(165, 105, 189)",
                   tension: 0.1,
                 },
-                //   {
-                //     label: "data n3",
-                //     data: data3,
-                //     fill: false,
-                //     borderColor: "rgb(75, 192, 192)",
-                //     tension: 0.1,
-                //   },
               ],
             }}
+            options={options}
             height={400}
             width={600}
           />
         </div>
-        <div class="col-md-4">
+        <div className="col-md-4">
+          <h5>
+            <img src="https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@07fd63a0b662ed99c8ad870ee9227b8ef5e11630/svg/color/ltc.svg"></img>{" "}
+            LTC
+          </h5>
           <Line
             data={{
               labels: resultBtcTime,
@@ -114,19 +125,14 @@ const Grafico = (props) => {
                 {
                   label: "LTC",
                   data: resultLtcPrice,
-                  fill: false,
+                  fill: true,
+                  backgroundColor: "rgb(230, 126, 34, 0.5)",
                   borderColor: "rgb(230, 126, 34)",
                   tension: 0.1,
                 },
-                //   {
-                //     label: "data n3",
-                //     data: data3,
-                //     fill: false,
-                //     borderColor: "rgb(75, 192, 192)",
-                //     tension: 0.1,
-                //   },
               ],
             }}
+            options={options}
             height={400}
             width={600}
           />
