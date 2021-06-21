@@ -4,6 +4,7 @@ import LoginForm from "./components/LoginForm";
 import { UserProvider } from "./contexts/userContext";
 import All from "./views/All";
 import Header from "./views/Header";
+import Historial from "./views/Historial";
 import Login from "./views/Login";
 import Main from "./views/Main";
 import Register from "./views/Register";
@@ -11,21 +12,34 @@ import Register from "./views/Register";
 function App() {
   return (
     <div className="App">
-      
-
       <UserProvider>
         <Router>
           <Header />
 
           <Switch>
             <Route path="/login">
-              <Login />
+              <div className="container-fluid">
+                <div className="row">
+                  <div className="col-md-4"></div>
+                  <div className="col-md-4"><Login /></div>
+                  <div className="col-md-4"></div>
+                </div>
+              </div>
             </Route>
             <Route path="/register">
-              <Register />
+              <div className="container-fluid">
+                <div className="row">
+                  <div className="col-md-4"></div>
+                  <div className="col-md-4"><Register /></div>
+                  <div className="col-md-4"></div>
+                </div>
+              </div>
             </Route>
             <Route path="/all">
               <All />
+            </Route>
+            <Route path="/historial">
+              <Historial />
             </Route>
             <Route path="/">
               <Main />

@@ -12,7 +12,7 @@ const CompraForm = (props) => {
         <div >
           <Formik
           initialValues={{
-          moneda:'btc',
+          moneda:'BTC',
           monto:1
         }}
         validationSchema={Yup.object().shape({
@@ -42,20 +42,20 @@ const CompraForm = (props) => {
             <div>
                 <Form className= "contact" method= "post" onSubmit={handleSubmit}>
 
-                        <label htmlFor="moneda" className="col-form-label">¿Qué Moneda deseas comprar?</label>
+                        <label htmlFor="moneda" >¿Qué Moneda deseas comprar?</label>
                          <Field  id='moneda' type="text" as='select' placeholder="Contenido Reseña" className="form-select" name='moneda'>
-                            <option value="btc">Bitcoin</option>
-                            <option value="eth">Ethereum</option>
-                            <option value="ltc">Litecoin</option>
+                            <option value="BTC">Bitcoin</option>
+                            <option value="ETH">Ethereum</option>
+                            <option value="LTC">Litecoin</option>
                          </Field>
                          
 
-                         <label htmlFor="monto" className="col-form-label">Monto</label>
+                         <label htmlFor="monto" >Monto</label>
                          <Field id='monto' type="number" className="form-control" name='monto'></Field>
                          {errors.monto && touched.monto && <p>{errors.monto}</p>}
                          
                 <br></br>
-                        <button className="m-1" type="submit" disabled={Object.values(errors).length > 0}>Comprar</button>
+                        <button className="btn btn-primary" type="submit" disabled={Object.values(errors).length > 0}>Comprar</button>
                 </Form>
                 </div>
         );

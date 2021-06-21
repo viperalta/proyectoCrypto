@@ -13,5 +13,5 @@ module.exports = function(app) {
 
   app.post("/api/compra/add", CompraController.createCompra);
   app.get("/api/compras-by-user/:id", CompraController.getComprasByUser);
-  app.delete("/api/delete-compra/:id", CompraController.deleteCompra);
+  app.delete("/api/compra/:id", CompraController.deleteCompra);
 }

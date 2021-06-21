@@ -49,3 +49,41 @@ form label{
 .nodecoration{
   text-decoration: none;
 }
+
+header{
+  display: flex;
+  padding: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #F8F9FA;
+}
+
+header .menu a{
+  margin-left: 1rem;
+  font-size: 18px;
+  text-decoration: none;
+  color:#282c34;
+}
+
+header .menu a:hover{
+  color:rgb(110, 107, 107);
+}
+
+h2{
+  margin-top:1rem
+}
+
+.title-separator{
+  width: 70%;
+  margin:auto;
+  margin-bottom: 1rem;
+}
+
+.pactual{
+  font-size: 14px;
+}
+
+.card-text{
+  margin-bottom: 5px;
+}
+

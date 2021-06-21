@@ -62,33 +62,13 @@ const Main = () => {
       });
   };
 
-  const showBilletera = () => {
-    if (user) {
-      if (compras) {
-        return (
-          <>
-            <h1>Mi Billetera</h1>
-            {compras.map((compra, key) => (
-              <p>
-                {" "}
-                {compra.moneda} {compra.monto}{" "}
-              </p>
-            ))}
-          </>
-        );
-      } else {
-        return <></>;
-      }
-    } else {
-      return <></>;
-    }
-  };
 
   const showMain = () => {
     if (user) {
       return (
         <>
-          <h2>Bienvenid@ al proyecto crypto</h2>
+          <h2>DASHBOARD</h2>
+          <hr className="title-separator"></hr>
 
           <div className="container-fluid">
             <div className="row">
@@ -117,6 +97,7 @@ const Main = () => {
         </div>
       ))}
       {showMain()}
+      <br></br>
       <Grafico />
     </div>
   );
