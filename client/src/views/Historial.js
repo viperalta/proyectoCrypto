@@ -42,7 +42,7 @@ const Historial = () => {
                                 <tr>
                                   <th scope="col">Fecha</th>
                                   <th scope="col">Tipo de Moneda</th>
-                                  <th scope="col">Peso</th>
+                                  <th scope="col">Monto</th>
                                   <th scope="col">
                                     
                                   </th>
