@@ -90,8 +90,9 @@ const Historial = () => {
             height={100}
             width={100}
             timeout={10000} //3 secs
+            className="dashboard"
           />
-          <h3>Cargando Compras</h3>
+          <h3 className="dashboard">Cargando Compras</h3>
         </>)
     }
   };
