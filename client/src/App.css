@@ -7,6 +7,9 @@
   to { opacity: 0; }
 }
 
+html{
+  height: 100%;
+}
 .App {
   text-align: center;
 }
@@ -131,7 +134,11 @@ h2{
 }
 
 .btnswitch .separator{
-  border-right: 1px solid black;
+  border-right: 1px solid rgb(78, 78, 78);
   margin-left: 0.5rem;
   margin-right:0.8rem;
+}
+
+.dashboard{
+text-align: center;
 }

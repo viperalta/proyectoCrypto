@@ -81,7 +81,7 @@ const Main = () => {
     if (user) {
       return (
         <>
-          <h2 className={theme} >DASHBOARD</h2>
+          <h2 className={`{theme} dashboard`} >DASHBOARD</h2>
           <hr className="title-separator"></hr>
 
           <div className="container-fluid">
@@ -115,7 +115,7 @@ const Main = () => {
       {showMain()}
       <br></br>
       <Grafico />
-      <Switches/>
+     
       
     </div>
   );

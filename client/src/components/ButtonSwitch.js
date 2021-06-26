@@ -13,6 +13,8 @@ export default function Switches() {
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
     toggleFunction();
+    if (!toggle) { document.body.style.background="#161616"; }
+    if (toggle) { document.body.style.background="white"; }
   };
 
   return (

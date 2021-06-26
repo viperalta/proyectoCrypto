@@ -97,7 +97,7 @@ const Historial = () => {
   };
 
   return <>
-  <h2>HISTORIAL DE COMPRAS</h2>
+  <h2 className={`{theme} dashboard`}>HISTORIAL DE COMPRAS</h2>
           <hr className="title-separator"></hr>
   {success && <> 
     <div className="alert alert-success" role="alert">La compra ha sido eliminada con éxito</div>
