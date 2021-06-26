@@ -16,7 +16,7 @@ export default function Switches() {
   };
 
   return (
-    <div>
+    <div className="btnswitch">
       <Switch
         checked={state.checkedB}
         onChange={handleChange}
@@ -25,6 +25,7 @@ export default function Switches() {
         inputProps={{ "aria-label": "primary checkbox" }}
       />
       DarkMode
+      <div className="separator"> &nbsp;</div>
     </div>
   );
 }

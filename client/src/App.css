@@ -115,3 +115,23 @@ h2{
   animation: fadein 500ms;
 
 }
+
+.menubuttons{
+  display:flex;
+  flex-direction: row;
+  justify-content:space-between;
+  align-items: center;
+}
+
+.btnswitch{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.btnswitch .separator{
+  border-right: 1px solid black;
+  margin-left: 0.5rem;
+  margin-right:0.8rem;
+}

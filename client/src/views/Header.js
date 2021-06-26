@@ -9,6 +9,7 @@ import {
   useHistory,
 } from "react-router-dom";
 import { ThemeContext } from "../contexts/ThemeContext";
+import Switches from "../components/ButtonSwitch";
 
 
 const Header = () => {
@@ -58,7 +59,8 @@ const Header = () => {
                  <Link to="/historial">Historial de Compras</Link>
              </div>
              <div className="menubuttons">
-             ¡Hola {user.firstName}!{" "}
+               <Switches />
+             ¡Hola {user.firstName+'!'} &nbsp;{" "}
                 <button onClick={logOut} className="btn-secondary">
                   Cerrar Sesion
                 </button>
