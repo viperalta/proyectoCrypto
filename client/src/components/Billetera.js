@@ -73,7 +73,7 @@ const Billetera = (props) => {
 
   return (
     <>
-      <h3>BILLETERA <img src='https://image.flaticon.com/icons/png/128/214/214362.png' height='30rem'/></h3>
+      <h3 className={ `dashboard`}>BILLETERA <img src='https://image.flaticon.com/icons/png/128/214/214362.png' height='30rem'/></h3>
         <div className="row">
           <div className="col-md-4">
             
