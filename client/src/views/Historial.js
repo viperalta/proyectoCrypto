@@ -28,7 +28,7 @@ const Historial = () => {
   const renderTable = () => {
     if (compras) {
         if(compras.length===0){
-            return(<h5>Aún no se han hecho compras</h5>)
+            return(<h5 className="dashboard">Aún no se han hecho compras</h5>)
         }else{
             return (
                 <>

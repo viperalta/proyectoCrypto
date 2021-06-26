@@ -13,8 +13,8 @@ const Main = () => {
   const [errors, setErrors] = useState([]);
   const [compras, setCompras] = useState([]);
   const [refresh, setRefresh] = useState(1);
-  
-  const [theme, setTheme] = useState('');
+
+  const [theme, setTheme] = useState("");
   const { toggle, toggleFunction } = React.useContext(ThemeContext);
 
   useEffect(() => {
@@ -81,7 +81,7 @@ const Main = () => {
     if (user) {
       return (
         <>
-          <h2 className={`{theme} dashboard`} >DASHBOARD</h2>
+          <h2 className={`{theme} dashboard`}>DASHBOARD</h2>
           <hr className="title-separator"></hr>
 
           <div className="container-fluid">
@@ -99,7 +99,13 @@ const Main = () => {
     } else {
       return (
         <>
-          <h2 className={theme}>Bienvenid@ al proyecto crypto</h2>
+          <div class={`card portada ${theme}`}>
+            <div class={`card-body bodysize ${theme}`}>
+              Bienvenido/a a Coding Dojo Exchange. Aquí podrás comprar crypto
+              monedas y ver la evolución del precio de Bitcoin, Ethereum y
+              Litecoin.
+            </div>
+          </div>
         </>
       );
     }
@@ -115,8 +121,6 @@ const Main = () => {
       {showMain()}
       <br></br>
       <Grafico />
-     
-      
     </div>
   );
 };

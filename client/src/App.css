@@ -142,3 +142,12 @@ h2{
 .dashboard{
 text-align: center;
 }
+
+.portada{
+  width: 70%;
+  margin:10px auto;
+}
+
+.bodysize{
+  font-size: 20px;
+}

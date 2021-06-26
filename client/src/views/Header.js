@@ -53,7 +53,7 @@ const Header = () => {
       return (
         <>
          <header className={theme} >
-             <h3>Proyecto Crypto</h3>
+             <h3>Coding Dojo Exchange</h3>
              <div className="menu">
                  <Link className={theme} to="/">Dashboard</Link>
                  <Link to="/historial">Historial de Compras</Link>
@@ -75,7 +75,7 @@ const Header = () => {
             <div className="container-fluid">
               <span className="navbar-text">
                 <Link to="/" className="nodecoration">
-                  <h3>Proyecto Crypto</h3>
+                  <h3>Coding Dojo Exchange</h3>
                 </Link>
               </span>
               <span className="navbar-text">
