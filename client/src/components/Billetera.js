@@ -1,6 +1,21 @@
 import React, { useEffect,useState } from "react";
+import { ThemeContext } from "../contexts/ThemeContext";
 
 const Billetera = (props) => {
+
+  const [theme, setTheme] = useState('');
+  const { toggle, toggleFunction } = React.useContext(ThemeContext);
+
+  useEffect(() => {
+    var temp = "";
+    if (toggle) {
+      temp = "bg-dark";
+    } else {
+      temp = "";
+    }
+    setTheme(temp);
+  }, [toggle]);
+
   const { compras } = props;
 
   const btcs = compras.filter((compra, key) => compra.moneda === "BTC");
@@ -55,13 +70,14 @@ const Billetera = (props) => {
 
   const formatter = new Intl.NumberFormat('es-CL',{style:'currency',currency:'CLP'});
 
+
   return (
     <>
       <h3>BILLETERA <img src='https://image.flaticon.com/icons/png/128/214/214362.png' height='30rem'/></h3>
         <div className="row">
           <div className="col-md-4">
             
-            <div class="card">
+            <div className={`card ${theme}`}>
               <div class="card-header">BITCOIN</div>
               <div class="card-body">
                 <h5 class="card-title">{totalb}</h5>
@@ -77,7 +93,7 @@ const Billetera = (props) => {
           </div>
           <div className="col-md-4">
 
-          <div class="card">
+          <div className={`card ${theme}`}>
               <div class="card-header">ETHEREUM</div>
               <div class="card-body">
                 <h5 class="card-title">{totale}</h5>
@@ -93,7 +109,7 @@ const Billetera = (props) => {
           </div>
           <div className="col-md-4">
 
-          <div class="card">
+          <div className={`card ${theme}`}>
               <div class="card-header">LITECOIN</div>
               <div class="card-body">
                 <h5 class="card-title">{totall}</h5>

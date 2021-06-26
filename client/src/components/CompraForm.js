@@ -1,16 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { BrowserRouter as Router, Switch, Route, Link,useHistory,Redirect } from "react-router-dom";
+import { ThemeContext } from "../contexts/ThemeContext";
 
 const CompraForm = (props) => {
+    
+  const [theme, setTheme] = useState('');
+  const { toggle, toggleFunction } = React.useContext(ThemeContext);
+
+  useEffect(() => {
+    var temp = "";
+    if (toggle) {
+      temp = "dark-mode";
+    } else {
+      temp = "";
+    }
+    setTheme(temp);
+  }, [toggle]);
 
     const {onSubmitProp}=props;
 
 
     return (
         <div >
-          <Formik
+          <Formik 
           initialValues={{
           moneda:'BTC',
           monto:1
@@ -43,7 +57,7 @@ const CompraForm = (props) => {
                 <Form className= "contact" method= "post" onSubmit={handleSubmit}>
 
                         <label htmlFor="moneda" >¿Qué Moneda deseas comprar?</label>
-                         <Field  id='moneda' type="text" as='select' placeholder="Contenido Reseña" className="form-select" name='moneda'>
+                         <Field  id='moneda' type="text" as='select' placeholder="Contenido Reseña" className={`form-select ${theme}`} name='moneda'>
                             <option value="BTC">Bitcoin</option>
                             <option value="ETH">Ethereum</option>
                             <option value="LTC">Litecoin</option>
@@ -51,7 +65,7 @@ const CompraForm = (props) => {
                          
 
                          <label htmlFor="monto" >Monto</label>
-                         <Field id='monto' type="number" className="form-control" name='monto'></Field>
+                         <Field id='monto' type="number" className={`form-control ${theme}`} name='monto'></Field>
                          {errors.monto && touched.monto && <p>{errors.monto}</p>}
                          
                 <br></br>

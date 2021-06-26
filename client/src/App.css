@@ -1,3 +1,12 @@
+@keyframes fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes fadeout {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
 .App {
   text-align: center;
 }
@@ -22,6 +31,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  
 }
 
 .App-link {
@@ -87,3 +97,21 @@ h2{
   margin-bottom: 5px;
 }
 
+.dark-mode{
+  color:white;
+  background-color: rgb(22, 22, 22);
+  animation: fadein 500ms;
+}
+
+
+.dark-mode a {
+  color: white !important;
+  animation: fadein 500ms;
+
+}
+
+.dark-mode table {
+  color: white !important;
+  animation: fadein 500ms;
+
+}

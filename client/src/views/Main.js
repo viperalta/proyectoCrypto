@@ -5,12 +5,27 @@ import { useUser } from "../contexts/userContext";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Grafico from "../components/Grafico";
+import { ThemeContext } from "../contexts/ThemeContext";
+import Switches from "../components/ButtonSwitch";
 
 const Main = () => {
   const { user, setUser } = useUser();
   const [errors, setErrors] = useState([]);
   const [compras, setCompras] = useState([]);
-  const [refresh,setRefresh]=useState(1);
+  const [refresh, setRefresh] = useState(1);
+  
+  const [theme, setTheme] = useState('');
+  const { toggle, toggleFunction } = React.useContext(ThemeContext);
+
+  useEffect(() => {
+    var temp = "";
+    if (toggle) {
+      temp = "dark-mode";
+    } else {
+      temp = "";
+    }
+    setTheme(temp);
+  }, [toggle]);
 
   useEffect(() => {
     if (user) {
@@ -47,7 +62,7 @@ const Main = () => {
             console.error(err);
             return { success: false, data: err.message };
           });
-          setRefresh((prev)=>prev+1);
+        setRefresh((prev) => prev + 1);
       })
       .catch((err) => {
         console.log(err);
@@ -62,28 +77,29 @@ const Main = () => {
       });
   };
 
-
   const showMain = () => {
     if (user) {
       return (
         <>
-          <h2>DASHBOARD</h2>
+          <h2 className={theme} >DASHBOARD</h2>
           <hr className="title-separator"></hr>
 
           <div className="container-fluid">
             <div className="row">
-              <div className="col-md-4"><CompraForm onSubmitProp={createCompra} /></div>
-              <div className="col-md-8"><Billetera compras={compras} /></div>
+              <div className="col-md-4">
+                <CompraForm onSubmitProp={createCompra} />
+              </div>
+              <div className="col-md-8">
+                <Billetera compras={compras} />
+              </div>
             </div>
           </div>
-
-          
         </>
       );
     } else {
       return (
         <>
-          <h2>Bienvenid@ al proyecto crypto</h2>
+          <h2 className={theme}>Bienvenid@ al proyecto crypto</h2>
         </>
       );
     }
@@ -99,6 +115,8 @@ const Main = () => {
       {showMain()}
       <br></br>
       <Grafico />
+      <Switches/>
+      
     </div>
   );
 };

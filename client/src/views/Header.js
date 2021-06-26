@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import logout from "../actions/logout";
 import { useUser } from "../contexts/userContext";
 import {
@@ -8,10 +8,37 @@ import {
   Link,
   useHistory,
 } from "react-router-dom";
+import { ThemeContext } from "../contexts/ThemeContext";
+
 
 const Header = () => {
   const { user, setUser } = useUser();
   const history = useHistory();
+
+  const [theme, setTheme] = useState('');
+  const [navTheme, setNavTheme] = useState('');
+  const { toggle, toggleFunction } = React.useContext(ThemeContext);
+
+  useEffect(() => {
+    var temp = "";
+    if (toggle) {
+      temp = "dark-mode";
+    } else {
+      temp = "";
+    }
+    setTheme(temp);
+  }, [toggle]);
+
+  useEffect(() => {
+    var temp = "";
+    if (toggle) {
+      temp = "navbar dark-mode";
+    } else {
+      temp = "navbar navbar-light bg-light";
+    }
+    setNavTheme(temp);
+  }, [toggle]);
+  
 
   const logOut = async () => {
     const { success } = await logout();
@@ -24,10 +51,10 @@ const Header = () => {
     if (user) {
       return (
         <>
-         <header>
+         <header className={theme} >
              <h3>Proyecto Crypto</h3>
              <div className="menu">
-                 <Link to="/">Dashboard</Link>
+                 <Link className={theme} to="/">Dashboard</Link>
                  <Link to="/historial">Historial de Compras</Link>
              </div>
              <div className="menubuttons">
@@ -42,7 +69,7 @@ const Header = () => {
     } else {
       return (
         <>
-          <nav className="navbar navbar-light bg-light">
+          <nav className={navTheme}>
             <div className="container-fluid">
               <span className="navbar-text">
                 <Link to="/" className="nodecoration">
